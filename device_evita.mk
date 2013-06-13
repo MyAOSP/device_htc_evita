@@ -16,14 +16,14 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# common msm8960 configs
-$(call inherit-product, device/htc/msm8960-common/msm8960.mk)
+# common S4 configs
+$(call inherit-product, device/htc/s4-common/s4.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/evita/overlay
 
 # Boot ramdisk setup
 PRODUCT_PACKAGES += \
-    fstab.elite \
+    fstab.qcom \
     init.target.rc
 
 # NFCEE access control
@@ -34,9 +34,6 @@ else
 endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
-
-# HTC BT audio config
-PRODUCT_COPY_FILES += device/htc/evita/configs/AudioBTID.csv:system/etc/AudioBTID.csv
 
 # vold config
 PRODUCT_COPY_FILES += \
@@ -57,11 +54,9 @@ PRODUCT_COPY_FILES += \
 
 # Keylayouts and Keychars
 PRODUCT_COPY_FILES += \
-    device/htc/evita/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
     device/htc/evita/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
     device/htc/evita/keylayout/keypad_8960.kl:system/usr/keylayout/keypad_8960.kl \
     device/htc/evita/keylayout/msm8960-snd-card_Button_Jack.kl:system/usr/keylayout/msm8960-snd-card_Button_Jack.kl \
-    device/htc/evita/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/htc/evita/keylayout/synaptics-rmi-touchscreen.kl:system/usr/keylayout/synaptics-rmi-touchscreen.kl
 
 # Input device config
@@ -70,6 +65,10 @@ PRODUCT_COPY_FILES += \
     device/htc/evita/idc/qwerty2.idc:system/usr/idc/qwerty2.idc \
     device/htc/evita/idc/qwerty.idc:system/usr/idc/qwerty.idc \
     device/htc/evita/idc/synaptics-rmi-touchscreen.idc:system/usr/idc/synaptics-rmi-touchscreen.idc
+
+# Recovery
+PRODUCT_COPY_FILES += \
+    device/htc/evita/rootdir/etc/fstab.qcom:recovery/root/fstab.qcom
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -87,7 +86,6 @@ PRODUCT_PACKAGES += \
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
 
 # Extra properties
