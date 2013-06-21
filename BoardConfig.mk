@@ -24,8 +24,8 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-# inherit from common msm8960
--include device/htc/msm8960-common/BoardConfigCommon.mk
+# inherit from S4 common
+-include device/htc/s4-common/BoardConfigCommon.mk
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := evita
@@ -73,7 +73,13 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_VOLD_MAX_PARTITIONS := 36
 
 # Recovery
-BOARD_SUPPRESS_EMMC_WIPE := true
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
-BOARD_USES_MMCUTILS := true
 TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/evita/recovery/kernel
+
+# TWRP
+DEVICE_RESOLUTION := 720x1280
+BOARD_HAS_NO_REAL_SDCARD := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TW_INCLUDE_DUMLOCK := true
+TW_INCLUDE_JB_CRYPTO := true
